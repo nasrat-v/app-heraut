@@ -15,6 +15,9 @@
 # Java class files
 *.class
 
+# nodejs modules
+node_modules/
+
 # Generated files
 bin/
 gen/
