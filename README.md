@@ -5,8 +5,8 @@
 ## Framework
 The application is built with:
 - Ionic Capacitor framework https://capacitor.ionicframework.com/
-- On an Angular framework based project https://angular.io/
-- With TypeScript https://www.typescriptlang.org/
+- on an Angular framework based project https://angular.io/
+- with TypeScript superset https://www.typescriptlang.org/
 
 ## Cross-platform
 With one code base, it is available on:
