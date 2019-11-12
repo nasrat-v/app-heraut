@@ -19,6 +19,11 @@ With one code base, it is available on:
 
 On project root folder:
 
+#### iOS
+```bash
+npx cap open ios
+```
+
 #### Android
 ```bash
 npx cap open android
