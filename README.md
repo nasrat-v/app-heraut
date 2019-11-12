@@ -12,7 +12,7 @@ The application is built with:
 With one code base, it is available on:
 * [ ] iOS
 * [x] Android
-* [x] Electron (MacOs, Windows and Linux desktop)
+* [ ] Electron (MacOs, Windows and Linux desktop)
 * [x] Web
 
 ## Compilation
