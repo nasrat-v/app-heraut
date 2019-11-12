@@ -12,8 +12,10 @@ The application is built with:
 With one code base, it is available on:
 * [ ] iOS
 * [x] Android
-* [ ] Electron (MacOs, Windows and Linux desktop)
+* [x] Electron (MacOs, Windows and Linux desktop) ---> [bug] See this issue: ([#1918][i1918])
 * [x] Web
+
+[i1918]: https://github.com/ionic-team/capacitor/issues/1918
 
 ## Compilation
 
