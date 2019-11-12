@@ -1,0 +1,8 @@
+{
+  "appId": "com.heraut.app",
+  "appName": "app-heraut",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}
