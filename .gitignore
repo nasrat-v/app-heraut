@@ -15,6 +15,9 @@
 # Java class files
 *.class
 
+# nodejs modules
+node_modules/
+
 # Generated files
 bin/
 gen/
@@ -84,7 +87,7 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-# Cordova plugins for Capacitor
+# capacitor android plugins
 capacitor-cordova-android-plugins
 
 # Copied web assets

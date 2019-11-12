@@ -1,8 +1,0 @@
-{
-  "appId": "com.epitech.appheraut",
-  "appName": "app-heraut",
-  "bundledWebRuntime": true,
-  "npmClient": "npm",
-  "webDir": "www",
-  "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh"
-}

@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">app-heraut</string>
-    <string name="title_activity_main">app-heraut</string>
-    <string name="package_name">com.epitech.appheraut</string>
-    <string name="fileprovider_authority">com.epitech.appheraut.fileprovider</string>
-    <string name="custom_url_scheme">com.epitech.appheraut</string>
-</resources>
