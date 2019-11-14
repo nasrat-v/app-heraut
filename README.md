@@ -33,20 +33,24 @@ npx cap serve
 
 #### iOS
 ```bash
+npx cap copy
 npx cap open ios
 ```
 
 #### Android
 ```bash
+npx cap copy
 npx cap open android
 ```
 
 #### Electron
 ```bash
+npx cap copy
 npx cap open electron
 ```
 or
 ```bash
+npx cap copy
 cd electron
 npm run electron:start
 ```
