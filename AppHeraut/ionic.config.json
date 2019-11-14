@@ -1,0 +1,7 @@
+{
+  "name": "AppHeraut",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
