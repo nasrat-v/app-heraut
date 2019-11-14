@@ -19,7 +19,12 @@ With one code base, it is available on:
 
 ## Compilation
 
-On project root folder:
+#### Build source code
+```bash
+ng build --prod
+```
+
+To open the app (on project root folder):
 
 #### iOS
 ```bash
