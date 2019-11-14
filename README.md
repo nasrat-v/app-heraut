@@ -10,16 +10,26 @@ The application is built with:
 
 ## Cross-platform
 With one code base, it is available on:
+* [x] Web
 * [ ] iOS
 * [x] Android
 * [x] Electron (MacOs, Windows and Linux desktop) ---> [bug] See this issue: ([#1918][i1918])
-* [x] Web
 
 [i1918]: https://github.com/ionic-team/capacitor/issues/1918
 
 ## Compilation
 
-On project root folder:
+#### Build source code
+```bash
+ionic build
+```
+
+To open the app (on project root folder):
+
+#### Web
+```bash
+npx cap serve
+```
 
 #### iOS
 ```bash
@@ -39,9 +49,4 @@ or
 ```bash
 cd electron
 npm run electron:start
-```
-
-#### Web
-```bash
-npx cap serve
 ```
