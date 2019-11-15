@@ -29,7 +29,7 @@ export class Tab2Page implements OnInit {
       this.lat = result.coords.latitude;
       this.lng = result.coords.longitude;
 
-      // calling getAddress function to decode the address
+      // calling getAddress service function to decode the address
       this.googleMapsService.getAddress(this.lat, this.lng).subscribe(decodedAddress => {
         this.address = decodedAddress;
         console.log(this.address);
