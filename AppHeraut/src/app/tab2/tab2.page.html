@@ -1,9 +1,17 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Coordinates</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-item>Latitude: {{ latitude }}</ion-item>
-    <ion-item>Longitude: {{ longitude }}</ion-item>
-  </ion-card-content>
-</ion-card>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Current Location
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+    <agm-marker
+      [latitude]="lat"
+      [longitude]="lng"
+      (markerClick)="onMarkerClick()"
+    ></agm-marker>
+  </agm-map>
+</ion-content>
