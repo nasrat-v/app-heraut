@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Login Screen
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <h1 *ngIf="authFirebaseService.user | async">Welcome {{ (authFirebaseService.user | async)?.email }}!</h1>
+
+    <div *ngIf="!(authFirebaseService.user | async)">
+      <input type="text" [(ngModel)]="email" placeholder="email">
+      <input type="password" [(ngModel)]="password" placeholder="email">
+
+      <button (click)="signup()" [disabled]="!email || !password">
+        Signup
+      </button>
+
+      <button (click)="login()" [disabled]="!email || !password">
+        Login
+      </button>
+    </div>
+
+  <button (click)="logout()" *ngIf="authFirebaseService.user | async">
+    Logout
+  </button>
+    
+</ion-content>

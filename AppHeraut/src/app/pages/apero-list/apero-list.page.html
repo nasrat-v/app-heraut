@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>aperoList</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button routerLink="/apero-details">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+   
+    <ion-list>
+      <ion-item button [routerLink]="['/apero-details', apero.id]" *ngFor="let apero of (aperos | async)">
+        {{ apero._user_name_host }}
+      </ion-item>
+    </ion-list>
+  </ion-content>
