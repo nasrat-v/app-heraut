@@ -6,13 +6,13 @@
 
 <ion-content>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button routerLink="/apero-details">
+      <ion-fab-button routerLink="/tabs/apero-details">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
    
     <ion-list>
-      <ion-item button [routerLink]="['/apero-details', apero.id]" *ngFor="let apero of (aperos | async)">
+      <ion-item button [routerLink]="['/tabs/apero-details', apero.id]" *ngFor="let apero of (aperos | async)">
         {{ apero._user_name_host }}
       </ion-item>
     </ion-list>

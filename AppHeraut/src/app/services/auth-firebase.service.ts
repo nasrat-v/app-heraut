@@ -10,7 +10,7 @@ import { first, tap } from 'rxjs/operators';
 export class AuthFirebaseService {
   user: Observable<firebase.User>;
   //user_id = null;
-  //user_id:  string
+  user_token = null
 
   constructor(private firebaseAuth: AngularFireAuth) {
     this.user = firebaseAuth.authState;
@@ -34,6 +34,7 @@ export class AuthFirebaseService {
       .signInWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Nice, it worked!');
+
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -48,7 +49,17 @@ export class AuthFirebaseService {
   }
 
   isAuthenticated() {
+    
     return this.firebaseAuth.authState.pipe(first());
+  }
+
+  getUSer() {
+    //this.firebaseAuth.
+    return this.firebaseAuth.user;
+  }
+
+  getAuthState() {
+    return this.firebaseAuth.authState
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router, ActivatedRoute} from "@angular/router"
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  private route: ActivatedRoute
+  private router: Router
+
+  constructor() {
+  }
 
 }

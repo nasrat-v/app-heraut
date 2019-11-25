@@ -9,6 +9,7 @@ export interface Apero {
   _user_name_host: string,
   _lon:             number,
   _lat:             number,
+  _address:          string,
   _nb_slots:         number,
   _guests:          string[]
 }
@@ -82,5 +83,17 @@ export class AperoService {
  
   deleteApero(id: string): Promise<void> {
     return this.aperoCollection.doc(id).delete();
+  }
+
+  updateLonLat(apero: Apero, lon : number, lat: number) {
+    return this.aperoCollection.doc(apero._id).update({ 
+      _id_host: apero._id_host, 
+      _user_name_host: apero._user_name_host,
+      _lon: lon,
+      _lat: lat,
+      _nb_slots: apero._nb_slots,
+      _guests: apero._guests
+    }); 
+
   }
 }

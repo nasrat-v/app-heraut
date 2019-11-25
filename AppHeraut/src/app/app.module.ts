@@ -12,9 +12,10 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { LoginScreenModule } from '../app/login-screen/login-screen.module';
+import { LoginScreenModule } from './login-screen/login-screen.module'
 
 import { AuthFirebaseService } from './services/auth-firebase.service'
+import { TabsPageModule } from './tabs/tabs.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,6 +27,7 @@ import { AuthFirebaseService } from './services/auth-firebase.service'
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    TabsPageModule,
     LoginScreenModule
   ],
   providers: [

@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/"></ion-back-button>
+        <ion-back-button defaultHref="tabs"></ion-back-button>
       </ion-buttons>
       <ion-title>Apero Details</ion-title>
     </ion-toolbar>
@@ -22,6 +22,11 @@
         <ion-label position="stacked">Latitude</ion-label>
         <ion-input [(ngModel)]="apero._lat"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">address</ion-label>
+      <ion-input [(ngModel)]="apero._address"></ion-input>
+  </ion-item>
 
     <ion-item>
         <ion-label position="stacked">Number of guests</ion-label>

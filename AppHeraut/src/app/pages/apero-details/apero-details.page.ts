@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Apero, AperoService } from 'src/app/services/apero.service';
+import { GoogleMapsService } from 'src/app/services/google-maps.service';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-apero-details',
@@ -9,20 +11,41 @@ import { Apero, AperoService } from 'src/app/services/apero.service';
   styleUrls: ['./apero-details.page.scss'],
 })
 export class AperoDetailsPage implements OnInit {
+  lat: number;
+  lng: number;
+  address: string;
 
   apero: Apero = {
     _id_host:         '',
     _user_name_host:  '',
     _lon:             null,
     _lat:             null,
+    _address:         '',
     _nb_slots:        null,
     _guests:          null
   };
 
-  constructor(private activatedRoute: ActivatedRoute, private aperoService: AperoService,
-    private toastCtrl: ToastController, private router: Router) { }
+  constructor(private googleMapsService: GoogleMapsService,
+              private activatedRoute: ActivatedRoute, 
+              private aperoService: AperoService,
+              private toastCtrl: ToastController, 
+              private router: Router) { }
 
   ngOnInit() {
+  }
+
+  private getCurrentLocation() {
+    Plugins.Geolocation.getCurrentPosition().then(result => {
+       
+      this.lat = this.apero._lat = result.coords.latitude;
+      this.lng = this.apero._lon = result.coords.longitude;
+
+      // calling getAddress service function to decode the address
+      this.googleMapsService.getAddress(this.lat, this.lng).subscribe(decodedAddress => {
+        this.apero._address = decodedAddress;
+        console.log(this.address);
+      });
+    });
   }
 
   ionViewWillEnter() {
@@ -35,17 +58,30 @@ export class AperoDetailsPage implements OnInit {
   }
  
   addApero() {
-    this.aperoService.addApero(this.apero).then(() => {
-      this.router.navigateByUrl('/apero-list');
-      this.showToast('Apero added');
-    }, err => {
-      this.showToast('There was a problem adding your idea :(');
+    Plugins.Geolocation.getCurrentPosition().then(result => {
+       
+      this.apero._lat = result.coords.latitude;
+      this.apero._lon = result.coords.longitude;
+
+      // calling getAddress service function to decode the address
+      this.googleMapsService.getAddress(this.apero._lat, this.apero._lon).subscribe(decodedAddress => {
+        this.apero._address = decodedAddress;
+        //console.log(this.address);
+          
+        this.aperoService.addApero(this.apero).then(() => {
+          this.router.navigateByUrl('tabs/apero-list');
+          this.showToast('Apero added');
+        }, err => {
+          this.showToast('There was a problem adding your idea :(');
+        });
+      });
     });
+      
   }
  
   deleteApero() {
     this.aperoService.deleteApero(this.apero._id).then(() => {
-      this.router.navigateByUrl('/apero-list');
+      this.router.navigateByUrl('tabs//apero-list');
       this.showToast('Apero deleted');
     }, err => {
       this.showToast('There was a problem deleting your Apero :(');

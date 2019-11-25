@@ -31,6 +31,7 @@ export class LoginScreen {
   data: Observable<any>;
   dataCollection: AngularFirestoreCollection<any>;
   //user: User = null;
+  //user: AngularFireAuth.user;
 
   constructor(
     private authFirebaseService: AuthFirebaseService,
@@ -57,23 +58,27 @@ export class LoginScreen {
 
   signup() {
     this.authFirebaseService.signup(this.email, this.password);
+    
         /*this.profile._email = this.email;
         this.profile._lat = 100;
         this.profile._lon = 500;
         this.profile._user_name = this.username;
         this.profileService.addProfile(this.profile);*/
+        //this.profileService.
+        //this.profileService.createProfile(this.email);
+        //this.authFirebaseService.user.
 
         this.username = this.email = this.password = '';
         this.router.navigate(['tabs'])
-        //this.router.navigate(['/apero-list'])
-
   }
 
   login() {
     this.authFirebaseService.login(this.email, this.password);
     this.email = this.password = '';
-    this.router.navigate(['tabs'])
-    //this.router.navigate(['/apero-list'])
+    //console.log("lenght " + this.authFirebaseService.getAuthState());
+    
+
+    this.router.navigate(['/tabs', {profileService: this.profileService}]);
 
   }
 
