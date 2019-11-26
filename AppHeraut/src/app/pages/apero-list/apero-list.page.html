@@ -10,6 +10,12 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+
+    <ion-fab vertical="bottom" horizontal="begin" slot="fixed">
+      <ion-fab-button (click)="joinApero()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
    
     <ion-list>
       <ion-item button [routerLink]="['/tabs/apero-details', apero.id]" *ngFor="let apero of (aperos | async)">

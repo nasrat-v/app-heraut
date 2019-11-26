@@ -1,40 +1,78 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
+import { Observable, of } from 'rxjs';
+import { first, tap, switchMap } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { GoogleMapsService } from './google-maps.service';
+import { Plugins } from '@capacitor/core';
 
-import { Observable } from 'rxjs';
-import { first, tap } from 'rxjs/operators';
+export interface User {
+  _uid: string;
+  _email: string;
+  _lat: number,
+  _lon: number
+}
 
 @Injectable()
 export class AuthFirebaseService {
-  user: Observable<firebase.User>;
-  //user_id = null;
-  user_token = null
+  _user: Observable<User>;
 
-  constructor(private firebaseAuth: AngularFireAuth) {
-    this.user = firebaseAuth.authState;
+  constructor(private firebaseAuth: AngularFireAuth,
+    private googleMapsService: GoogleMapsService,
+    private afs: AngularFirestore,
+    private router: Router
+    ) {
+          this._user = this.firebaseAuth.authState.pipe(
+            switchMap(user => {
+              if (user) {
+                return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+              } else {
+                return of(null)
+              }
+            })
+          )
+  }
+
+  private updateUserData(uid, email, latitude, longitude) {
+    // Sets user data to firestore on login
+
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
+      const data: User = {
+        _uid: uid,
+        _email: email,
+        _lat: latitude,
+        _lon: longitude
+      }
+      return userRef.set(data, { merge: true })
+
   }
 
   signup(email: string, password: string) {
-    this.firebaseAuth
-      .auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(value => {
-        console.log('Success!', value);
-      })
-      .catch(err => {
-        console.log('Something went wrong:',err.message);
-      });
+      this.firebaseAuth
+        .auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(value => {
+          console.log('Success!', value);
+          Plugins.Geolocation.getCurrentPosition().then(result => {
+            this.updateUserData(value.user.uid, value.user.email, result.coords.latitude, result.coords.longitude);
+
+          });
+        })
+        .catch(err => {
+          console.log('Something went wrong:',err.message);
+       });
   }
 
   login(email: string, password: string) {
-    this.firebaseAuth
+          this.firebaseAuth
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Nice, it worked!');
-
+        Plugins.Geolocation.getCurrentPosition().then(result => { 
+          this.updateUserData(value.user.uid, value.user.email, result.coords.latitude, result.coords.longitude);
+        });
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -45,7 +83,6 @@ export class AuthFirebaseService {
     this.firebaseAuth
       .auth
       .signOut();
-      this.user = null;
   }
 
   isAuthenticated() {
@@ -53,13 +90,14 @@ export class AuthFirebaseService {
     return this.firebaseAuth.authState.pipe(first());
   }
 
-  getUSer() {
-    //this.firebaseAuth.
-    return this.firebaseAuth.user;
-  }
+
 
   getAuthState() {
     return this.firebaseAuth.authState
+  }
+
+  getFirebaseAuth() {
+    return this.firebaseAuth;
   }
 
 }

@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-
-import { Plugins } from '@capacitor/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { tap, map, take } from 'rxjs/operators';
 import { AuthFirebaseService } from '../services/auth-firebase.service'
 import { ProfileService, Profile } from '../services/profile.service';
 import {Router} from "@angular/router"
@@ -30,8 +27,6 @@ export class LoginScreen {
   password: string;
   data: Observable<any>;
   dataCollection: AngularFirestoreCollection<any>;
-  //user: User = null;
-  //user: AngularFireAuth.user;
 
   constructor(
     private authFirebaseService: AuthFirebaseService,
@@ -59,6 +54,7 @@ export class LoginScreen {
   signup() {
     this.authFirebaseService.signup(this.email, this.password);
     
+    
         /*this.profile._email = this.email;
         this.profile._lat = 100;
         this.profile._lon = 500;
@@ -75,10 +71,8 @@ export class LoginScreen {
   login() {
     this.authFirebaseService.login(this.email, this.password);
     this.email = this.password = '';
-    //console.log("lenght " + this.authFirebaseService.getAuthState());
-    
 
-    this.router.navigate(['/tabs', {profileService: this.profileService}]);
+    this.router.navigate(['/tabs']);
 
   }
 

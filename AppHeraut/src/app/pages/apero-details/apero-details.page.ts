@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Apero, AperoService } from 'src/app/services/apero.service';
 import { GoogleMapsService } from 'src/app/services/google-maps.service';
 import { Plugins } from '@capacitor/core';
+import { AuthFirebaseService } from 'src/app/services/auth-firebase.service';
 
 @Component({
   selector: 'app-apero-details',
@@ -22,30 +23,19 @@ export class AperoDetailsPage implements OnInit {
     _lat:             null,
     _address:         '',
     _nb_slots:        null,
-    _guests:          null
+    _nb_guests:       null,
+    _guests:          [],
+    _date:            null
   };
 
-  constructor(private googleMapsService: GoogleMapsService,
+  constructor(public authFirebaseService: AuthFirebaseService,
+              private googleMapsService: GoogleMapsService,
               private activatedRoute: ActivatedRoute, 
               private aperoService: AperoService,
               private toastCtrl: ToastController, 
               private router: Router) { }
 
   ngOnInit() {
-  }
-
-  private getCurrentLocation() {
-    Plugins.Geolocation.getCurrentPosition().then(result => {
-       
-      this.lat = this.apero._lat = result.coords.latitude;
-      this.lng = this.apero._lon = result.coords.longitude;
-
-      // calling getAddress service function to decode the address
-      this.googleMapsService.getAddress(this.lat, this.lng).subscribe(decodedAddress => {
-        this.apero._address = decodedAddress;
-        console.log(this.address);
-      });
-    });
   }
 
   ionViewWillEnter() {
@@ -62,6 +52,10 @@ export class AperoDetailsPage implements OnInit {
        
       this.apero._lat = result.coords.latitude;
       this.apero._lon = result.coords.longitude;
+      this.apero._user_name_host = this.authFirebaseService.getFirebaseAuth().auth.currentUser.email;
+      this.apero._id_host = this.authFirebaseService.getFirebaseAuth().auth.currentUser.uid;
+      this.apero._nb_guests = 0;
+
 
       // calling getAddress service function to decode the address
       this.googleMapsService.getAddress(this.apero._lat, this.apero._lon).subscribe(decodedAddress => {
