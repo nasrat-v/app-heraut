@@ -62,7 +62,8 @@ export class AperoDetailsPage implements OnInit {
         this.apero._address = decodedAddress;
         //console.log(this.address);
           
-        this.aperoService.addApero(this.apero).then(() => {
+        this.aperoService.addApero(this.apero).then((result) => {
+          console.log("apero id " + result.id);
           this.router.navigateByUrl('tabs/apero-list');
           this.showToast('Apero added');
         }, err => {
