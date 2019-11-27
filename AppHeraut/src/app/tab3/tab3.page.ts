@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router"
-
+import { AuthFirebaseService } from '../services/auth-firebase.service'
 
 @Component({
   selector: 'app-tab3',
@@ -9,11 +8,10 @@ import {Router} from "@angular/router"
 })
 export class Tab3Page {
 
-  constructor(private router: Router) {}
+  constructor(private authFirebaseService: AuthFirebaseService) {}
 
-  ngOnInit() {
-    this.router.navigate(['login'])
-
+  logout() {
+    this.authFirebaseService.logout();
+    console.log('logout');
   }
-
 }

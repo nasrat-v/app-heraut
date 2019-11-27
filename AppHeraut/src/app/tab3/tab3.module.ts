@@ -16,7 +16,6 @@ import { Tab3Page } from './tab3.page';
 })
 export class Tab3PageModule {
 
-  constructor(Pr) {
-
+  constructor() {
   }
 }

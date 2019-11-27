@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Login Screen
+      Welcome on AppHeraut !
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,21 +10,29 @@
 
     <h1 *ngIf="authFirebaseService.user | async">Welcome {{ (authFirebaseService.user | async)?.email }}!</h1>
 
-    <div *ngIf="!(authFirebaseService.user | async)">
-      <input type="text" [(ngModel)]="email" placeholder="email">
-      <input type="password" [(ngModel)]="password" placeholder="email">
+    <div class="centered" *ngIf="!(authFirebaseService.user | async)">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Credentials</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-input type="text" [(ngModel)]="email" placeholder="Email"></ion-input>
 
-      <button (click)="signup()" [disabled]="!email || !password">
-        Signup
-      </button>
+          <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
+        </ion-card-content>
+        <ion-card-content>
+          <ion-button (click)="signup()" [disabled]="!email || !password">
+            <ion-icon slot="end" name="arrow-dropleft"></ion-icon>
+            Signup
+          </ion-button>
 
-      <button (click)="login()" [disabled]="!email || !password">
-        Login
-      </button>
+          <ion-button (click)="login()" [disabled]="!email || !password">
+            <ion-icon slot="start" name="arrow-dropright"></ion-icon>
+            Login
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
     </div>
-
-  <button (click)="logout()" *ngIf="authFirebaseService.user | async">
-    Logout
-  </button>
     
 </ion-content>

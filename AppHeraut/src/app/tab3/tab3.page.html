@@ -1,9 +1,19 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Tab Three
+      Settings
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <div class="centered">
+      <ion-card>
+        <ion-card-content>
+          <ion-button (click)="logout()" routerLink="">
+            Logout
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+</ion-content>

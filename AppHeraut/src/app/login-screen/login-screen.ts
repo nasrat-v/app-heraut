@@ -4,7 +4,15 @@ import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { AuthFirebaseService } from '../services/auth-firebase.service'
 import { ProfileService, Profile } from '../services/profile.service';
-import {Router} from "@angular/router"
+import { Router } from "@angular/router"
+import { ToastController } from '@ionic/angular';
+import {
+  Plugins,
+  PushNotification,
+  PushNotificationToken,
+  PushNotificationActionPerformed } from '@capacitor/core';
+  
+  const { PushNotifications } = Plugins;
 
 export interface Profile {
   _id?:         '',
@@ -33,7 +41,8 @@ export class LoginScreen {
     private profileService: ProfileService,
     private afAuth: AngularFireAuth, 
     private afs: AngularFirestore,
-    private router: Router) {
+    private router: Router,
+    public toastController: ToastController) {
 
     
 
@@ -48,7 +57,6 @@ export class LoginScreen {
         })
       ).subscribe()*/
   }
-
   
 
   signup() {
@@ -65,19 +73,22 @@ export class LoginScreen {
         //this.authFirebaseService.user.
 
         this.username = this.email = this.password = '';
-        this.router.navigate(['tabs'])
+        this.router.navigate(['tabs']);
   }
 
   login() {
     this.authFirebaseService.login(this.email, this.password);
+    
     this.email = this.password = '';
-
     this.router.navigate(['/tabs']);
-
   }
 
-  logout() {
-      this.authFirebaseService.logout();
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 3500
+    });
+    toast.present();
   }
 
   setUserName(userName: string) {

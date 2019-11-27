@@ -9,24 +9,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { LoginScreenModule } from './login-screen/login-screen.module'
-
 import { AuthFirebaseService } from './services/auth-firebase.service'
+
+import { LoginScreenModule } from './login-screen/login-screen.module'
 import { TabsPageModule } from './tabs/tabs.module';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot(),
     AppRoutingModule, 
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireFunctionsModule,
     TabsPageModule,
     LoginScreenModule
   ],

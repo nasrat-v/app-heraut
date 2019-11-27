@@ -26,6 +26,7 @@ export class GoogleMapsService {
           if (!geoData || !geoData.results || geoData.results === 0) {
             return (null);
           }
+          console.log(geoData.results);
           return (geoData.results[0].formatted_address);
         })
       );
