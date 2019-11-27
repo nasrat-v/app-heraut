@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="tabs"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Apero's details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+   
+  <ion-content padding>   
+    <ion-item>
+      <ion-label position="stacked">Date</ion-label>
+      <ion-datetime [(ngModel)]="apero._date" placeholder="Select Date" max="2030"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="stacked">Number of guests</ion-label>
+        <ion-input [(ngModel)]="apero._nb_slots"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="stacked">Guests: </ion-label>
+        <ion-item *ngFor="let gust of apero._guests">
+          {{ guest }}
+        </ion-item>
+    </ion-item>
+   
+  </ion-content>
+   
+  <ion-footer *ngIf="!apero._id">
+    <ion-row no-padding text-center>
+        <ion-col size="12">
+        <ion-button vertical="bottom" horizontal="end" fill="solid" color="primary" (click)="addApero()">
+          <ion-icon name="checkmark" slot="start"></ion-icon>
+          Add Apero
+        </ion-button>
+        </ion-col>
+    </ion-row>
+  </ion-footer>
+   
+  <ion-footer *ngIf="apero._id">
+    <ion-row no-padding text-center>
+      <ion-col size="6">
+        <ion-button fill="solid" color="danger" (click)="deleteApero()">
+          <ion-icon name="trash" slot="start"></ion-icon>
+          Delete
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button fill="solid" color="primary" (click)="updateApero()">
+          <ion-icon name="save" slot="start"></ion-icon>
+          Update
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>
