@@ -73,7 +73,7 @@ export class LoginScreen {
         //this.authFirebaseService.user.
 
         this.username = this.email = this.password = '';
-        this.router.navigate(['tabs']);
+        this.router.navigate(['/tabs']);
   }
 
   login() {
