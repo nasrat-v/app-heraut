@@ -5,7 +5,6 @@
 # Using Android gitignore template: https://github.com/github/gitignore/blob/master/Android.gitignore
 
 # Built application files
-*.apk
 *.ap_
 *.aab
 
@@ -22,7 +21,6 @@ node_modules/
 bin/
 gen/
 out/
-release/
 
 # Gradle files
 .gradle/
